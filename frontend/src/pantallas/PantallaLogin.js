@@ -8,21 +8,21 @@ import Loader from '../componentes/Loader';
 const PantallaLogin = ({ history }) => {
 	const dispatch = useDispatch();
 
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
+	const [correo, setCorreo] = useState('');
+	const [contrasena, setContrasena] = useState('');
 
 	const usuarioLogin = useSelector((state) => state.usuarioLogin);
 	const { infoUsuario, loading, error } = usuarioLogin;
 
 	useEffect(() => {
 		if (infoUsuario) {
-			history.push('/user');
+			history.push('/');
 		}
 	}, [infoUsuario]);
 
 	const submitHandler = (e) => {
 		e.preventDefault();
-		dispatch(login(email, password));
+		dispatch(login(correo, contrasena));
 	};
 
 	return (
@@ -31,7 +31,7 @@ const PantallaLogin = ({ history }) => {
 			{loading ? (
 				<Loader />
 			) : (
-				<Row className='justify-content-md-center mt-5'>
+				<Row className='justify-content-md-center py-5'>
 					<Col xs={12} md={6}>
 						<h2>Log In</h2>
 						<Form onSubmit={submitHandler}>
@@ -39,9 +39,9 @@ const PantallaLogin = ({ history }) => {
 								<Form.Label>Email address</Form.Label>
 								<Form.Control
 									type='email'
-									placeholder='Enter email'
-									value={email}
-									onChange={(e) => setEmail(e.target.value)}
+									placeholder='Ingresa tu correo'
+									value={correo}
+									onChange={(e) => setCorreo(e.target.value)}
 								/>
 							</Form.Group>
 
@@ -49,14 +49,14 @@ const PantallaLogin = ({ history }) => {
 								<Form.Label>Password</Form.Label>
 								<Form.Control
 									type='password'
-									placeholder='Password'
-									value={password}
-									onChange={(e) => setPassword(e.target.value)}
+									placeholder='Ingresa tu contraseña'
+									value={contrasena}
+									onChange={(e) => setContrasena(e.target.value)}
 								/>
 							</Form.Group>
 
 							<Button variant='primary' type='submit'>
-								Log In
+								Iniciar sesión
 							</Button>
 						</Form>
 					</Col>

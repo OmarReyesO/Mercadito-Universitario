@@ -1,8 +1,10 @@
+import './style.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import PantallaRegistro from './pantallas/PantallaRegistro';
 import PantallaLogin from './pantallas/PantallaLogin';
-import PantallaUsuario from './pantallas/PantallaUsuario';
+import PantallaInicio from './pantallas/PantallaInicio';
 import Header from './componentes/Header';
+import HeaderCategorias from './componentes/HeaderCategorias';
 import { Container } from 'react-bootstrap';
 
 function App() {
@@ -10,13 +12,13 @@ function App() {
 		<>
 			<Router>
 				<Header />
+				<HeaderCategorias />
 				<main>
-					<Container>
-						<Route path='/' component={PantallaLogin} exact />
+						<Route path='/' component={PantallaInicio} exact />
 						<Route path='/login' component={PantallaLogin} exact />
-						<Route path='/user' component={PantallaUsuario} exact />
-						<Route path='/register' component={PantallaRegistro} exact />
-					</Container>
+						<div className="contenido">
+							<Route path='/register' component={PantallaRegistro} exact />	
+						</div>
 				</main>
 			</Router>
 		</>

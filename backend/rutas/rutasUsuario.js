@@ -5,7 +5,7 @@ import {
 	authUsuario,
 } from '../controladores/controladorUsuario.js';
 
-router.route('/').post(registrarUsuario);
+router.post('/registrar',registrarUsuario);
 
 router.post('/login', authUsuario);
 

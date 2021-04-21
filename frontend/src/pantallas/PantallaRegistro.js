@@ -12,12 +12,15 @@ import Loader from '../componentes/Loader';
 const PantallaRegistro = ({ history }) => {
 	const dispatch = useDispatch();
 
-	const [name, setName] = useState('');
-	const [lastName, setLastName] = useState('');
-	const [country, setCountry] = useState('');
-	const [phone, setPhone] = useState('');
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
+	const [nombre, setNombre] = useState('');
+	const [apellido, setApellido] = useState('');
+	const [campus, setCampus] = useState('');
+	const [noVendedor, setNoVendedor] = useState('');
+	const [vendedor, setVendedor] = useState('');
+	const [correo, setCorreo] = useState('');
+	const [contrasena, setContrasena] = useState('');
+	const [verificarContrasena, setVerificarContrasena] = useState('');
+	const [errorContrasena, setErrorContrasena] = useState(false);
 
 	const usuarioRegistrado = useSelector((state) => state.registrarUsuario);
 	const { usuario, loading, error, exito } = usuarioRegistrado;
@@ -27,108 +30,129 @@ const PantallaRegistro = ({ history }) => {
 
 	useEffect(() => {
 		if (exito && !loading) {
-			console.log(usuario);
-			dispatch(login(email, password));
+			dispatch(login(correo, contrasena));
 			dispatch(reinicioRegistroUsuario());
-			history.push('/user');
+			history.push('/');
 		}
 
-		if (infoUsuario) history.push('/user');
+		if (infoUsuario) history.push('/');
 	}, [exito, loading, infoUsuario]);
 
 	const submitHandler = (e) => {
 		e.preventDefault();
 		const usuario = {
-			name,
-			lastName,
-			country,
-			phone,
-			email,
-			password,
+			nombre,
+			apellido,
+			correo,
+			contrasena,
+			campus,
+			vendedor
 		};
-		dispatch(registrarUsuario(usuario));
+
+		if(contrasena !== verificarContrasena){
+			setErrorContrasena(true);
+		}else{
+			setErrorContrasena(false);
+			dispatch(registrarUsuario(usuario));
+		}
+		
 	};
 
 	return (
 		<Container>
-			{error && <Mensaje variant='danger'>Se ha producido un error.</Mensaje>}
 			{loading ? (
 				<Loader />
 			) : (
-				<Row className='justify-content-md-center mt-5'>
+				<Row className='justify-content-md-center py-5'>
 					<Col xs={12} md={6}>
-						<h2>Register</h2>
-						<Form onSubmit={submitHandler}>
+					{error && <Mensaje variant='danger'>Se ha producido un error.</Mensaje>}
+					{errorContrasena && <Mensaje variant='danger'>Las contraseñas no coinciden.</Mensaje>}
+						<h2>Registrarse</h2>
+						<Form onSubmit={submitHandler}	>
 							<Row>
 								<Col>
 									<Form.Group>
-										<Form.Label>Name</Form.Label>
+										<Form.Label>Nombre(s)</Form.Label>
 										<Form.Control
+											required
 											type='text'
-											placeholder='Enter name'
-											value={name}
-											onChange={(e) => setName(e.target.value)}
+											placeholder='Eg. Juan Pablo'
+											value={nombre}
+											onChange={(e) => setNombre(e.target.value)}
 										/>
 									</Form.Group>
 								</Col>
 								<Col>
 									<Form.Group>
-										<Form.Label>Last Name</Form.Label>
+										<Form.Label>Apellido(s)</Form.Label>
 										<Form.Control
+											required
 											type='text'
-											placeholder='Enter last name'
-											value={lastName}
-											onChange={(e) => setLastName(e.target.value)}
+											placeholder='Eg. López Sánchez'
+											value={apellido}
+											onChange={(e) => setApellido(e.target.value)}
 										/>
 									</Form.Group>
 								</Col>
 							</Row>
 							<Row>
 								<Col>
-									<Form.Group>
-										<Form.Label>Country</Form.Label>
-										<Form.Control
-											type='text'
-											placeholder='Enter country'
-											value={country}
-											onChange={(e) => setCountry(e.target.value)}
-										/>
-									</Form.Group>
-								</Col>
-								<Col>
-									<Form.Group>
-										<Form.Label>Phone</Form.Label>
-										<Form.Control
-											type='text'
-											placeholder='Phone'
-											value={phone}
-											onChange={(e) => setPhone(e.target.value)}
-										/>
-									</Form.Group>
+								<Form.Group controlId="exampleForm.ControlSelect1">
+									<Form.Label>Campus</Form.Label>
+										<Form.Control as="select" required onChange={(e) => setCampus(e.target.value)}>
+											<option value="">Selecciona una opción...</option>
+											<option value="CU">CU</option>
+											<option value="IADA"disabled>IADA</option>
+											<option value="ICB" disabled>ICB</option>
+											<option value="ICSA" disabled>ICSA</option>
+											<option value="IIT" disabled>IIT</option>
+										</Form.Control>
+								</Form.Group>
 								</Col>
 							</Row>
+
 							<Form.Group>
-								<Form.Label>Email address</Form.Label>
+								<Form.Label>Correo</Form.Label>
 								<Form.Control
+									required
 									type='email'
-									placeholder='Enter email'
-									value={email}
-									onChange={(e) => setEmail(e.target.value)}
+									placeholder='eg. al123456@alumnos.uacj.mx'
+									value={correo}
+									onChange={(e) => setCorreo(e.target.value)}
 								/>
 							</Form.Group>
 
 							<Form.Group>
-								<Form.Label>Password</Form.Label>
+								<Form.Label>Contraseña</Form.Label>
 								<Form.Control
+									required
 									type='password'
-									placeholder='Password'
-									value={password}
-									onChange={(e) => setPassword(e.target.value)}
+									placeholder='Contraseña'
+									value={contrasena}
+									onChange={(e) => setContrasena(e.target.value)}
 								/>
+							</Form.Group>
+
+							<Form.Group>
+								<Form.Label>Verificar contraseña</Form.Label>
+								<Form.Control
+									required
+									type='password'
+									placeholder='Contraseña'
+									value={verificarContrasena}
+									onChange={(e) => setVerificarContrasena(e.target.value)}
+								/>
+							</Form.Group>
+
+							<Form.Group>
+								<Form.Check disabled={vendedor} required type="checkbox" label="Solo quiero comprar" checked={noVendedor} onChange={(e) => setNoVendedor(e.target.checked)}/>
+							</Form.Group>
+							<Form.Group>
+								<Form.Check disabled={noVendedor} type="checkbox" label="Quiero comprar y vender" checked={vendedor} onChange={(e) => setVendedor(e.target.checked)}/>
 							</Form.Group>
 
 							<Button variant='primary' type='submit'>
-								Register
+								Registrarse!
 							</Button>
 						</Form>
 					</Col>

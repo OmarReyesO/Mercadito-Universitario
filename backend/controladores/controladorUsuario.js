@@ -6,16 +6,14 @@ import Usuario from '../modelos/ModeloUsuario.js';
 //@route	POST /api/usuarios/login
 //@access   Público
 const authUsuario = asyncHandler(async (req, res) => {
-	const { email, password } = req.body;
-	const usuario = await Usuario.findOne({ email });
-	if (usuario && (await usuario.verificarContrasena(password))) {
+	const { correo, contrasena } = req.body;
+	const usuario = await Usuario.findOne({ correo });
+	if (usuario && (await usuario.verificarContrasena(contrasena))) {
 		res.json({
 			_id: usuario._id,
-			name: usuario.name,
-			lastName: usuario.lastName,
-			email: usuario.email,
-			country: usuario.country,
-			phone: usuario.phone,
+			nombre:usuario.nombre,
+			apellido:usuario.apellido,
+			correo:usuario.correo,
 			token: generarToken(usuario._id),
 		});
 	} else {
@@ -28,9 +26,9 @@ const authUsuario = asyncHandler(async (req, res) => {
 //@ruta		POST /api/usuarios/
 //@acceso	Privado/Admin
 const registrarUsuario = asyncHandler(async (req, res) => {
-	const { email, password, name, lastName, country, phone } = req.body;
+	const { nombre, apellido, correo, contrasena, campus, vendedor} = req.body;
 
-	const usuarioExiste = await Usuario.findOne({ email });
+	const usuarioExiste = await Usuario.findOne({ correo });
 
 	if (usuarioExiste) {
 		res.status(400);
@@ -38,23 +36,23 @@ const registrarUsuario = asyncHandler(async (req, res) => {
 	}
 
 	const usuario = await Usuario.create({
-		email,
-		password,
-		name,
-		lastName,
-		country,
-		phone,
+		nombre,
+		apellido,
+		correo,
+		contrasena,
+		campus,
+		vendedor
 	});
 
 	if (usuario) {
 		res.status(201).json({
 			_id: usuario._id,
-			email: usuario.email,
-			name: usuario.name,
-			lastName: usuario.lastName,
-			country: usuario.country,
-			phone: usuario.phone,
-			password: usuario.password,
+			nombre:usuario.nombre,
+			apellido:usuario.apellido,
+			correo:usuario.correo,
+			campus:usuario.campus,
+			vendedor:usuario.vendedor,
+			token: generarToken(usuario._id),
 		});
 	} else {
 		res.status(400);

@@ -10,7 +10,7 @@ import {
 	REINICIO_USUARIO_REGISTRO,
 } from '../constantes/constantesUsuario';
 
-export const login = (email, password) => async (dispatch) => {
+export const login = (correo, contrasena) => async (dispatch) => {
 	try {
 		dispatch({
 			type: SOLICITUD_USUARIO_LOGIN,
@@ -24,7 +24,7 @@ export const login = (email, password) => async (dispatch) => {
 
 		const { data } = await axios.post(
 			'/api/usuarios/login',
-			{ email, password },
+			{ correo, contrasena },
 			config
 		);
 
@@ -63,7 +63,7 @@ export const registrarUsuario = (usuario) => async (dispatch, getState) => {
 			'Content-Type': 'application/json',
 		};
 
-		const { data } = await axios.post('/api/usuarios/', usuario, config);
+		const { data } = await axios.post('/api/usuarios/registrar/', usuario, config);
 
 		dispatch({
 			type: EXITO_USUARIO_REGISTRO,

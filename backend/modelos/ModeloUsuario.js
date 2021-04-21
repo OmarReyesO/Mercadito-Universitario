@@ -3,36 +3,54 @@ import bcrypt from 'bcryptjs';
 
 const EsquemaUsuario = mongoose.Schema(
 	{
-		email: {
+		correo: {
 			type: String,
 			required: true,
 			unique: true,
 		},
 
-		name: {
+		contrasena: {
 			type: String,
 			required: true,
 		},
 
-		lastName: {
+		nombre: {
 			type: String,
 			required: true,
 		},
 
-		country: {
+		apellido: {
 			type: String,
 			required: true,
 		},
 
-		phone: {
-			type: String,
-			required: true,
+		campus:{
+			type:String,
+			required:true
 		},
 
-		password: {
-			type: String,
-			required: true,
+		foto:{
+			type: String, 
 		},
+
+		vendedor:{
+			type: Boolean
+		},
+
+		horario:[
+			{
+				lunes: {type: String},
+				martes: {type: String},
+				miercoles: {type: String},
+				jueves: {type: String},
+				viernes: {type: String},
+			}
+		],
+
+		productos:[],
+
+		ordenes:[],
+
 	},
 	{
 		timestamps: true,
@@ -42,15 +60,15 @@ const EsquemaUsuario = mongoose.Schema(
 EsquemaUsuario.methods.verificarContrasena = async function (
 	contrasenaIngresada
 ) {
-	return bcrypt.compare(contrasenaIngresada, this.password);
+	return bcrypt.compare(contrasenaIngresada, this.contrasena);
 };
 
 EsquemaUsuario.pre('save', async function (next) {
-	if (!this.isModified('password')) {
+	if (!this.isModified('contrasena')) {
 		next();
 	}
 	const salt = await bcrypt.genSalt(10);
-	this.password = await bcrypt.hash(this.password, salt);
+	this.contrasena = await bcrypt.hash(this.contrasena, salt);
 });
 
 const Usuario = mongoose.model('Usuario', EsquemaUsuario);
