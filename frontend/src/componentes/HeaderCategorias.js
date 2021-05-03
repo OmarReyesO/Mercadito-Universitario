@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../utils/logo.png';
 import { useDispatch, useSelector } from 'react-redux';
-import { Container, Navbar, Nav, Button } from 'react-bootstrap';
+import { Container, Navbar, Nav, Button, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { logout } from '../acciones/accionesUsuario';
 
@@ -17,25 +17,20 @@ const HeaderCategorias = () => {
 	};
 
 	return (
-			<Navbar bg='light' style={{height:"45px"}}>
-				<Container style={{color: "#FFFFFF"}}>
-					<LinkContainer to='/alimentos'>
-						<Nav.Link>Alimentos</Nav.Link>
-					</LinkContainer>
-					<LinkContainer to='/ropa-y-accesorios'>
-						<Nav.Link>Ropa y accesorios</Nav.Link>
-					</LinkContainer>
-					<LinkContainer to='/salud-y-belleza'>
-						<Nav.Link>Salud y belleza</Nav.Link>
-					</LinkContainer>
-					<LinkContainer to='/electronica'>
-						<Nav.Link>Electrónica</Nav.Link>
-					</LinkContainer>
-					<LinkContainer to='/mas'>
-						<Nav.Link>Más</Nav.Link>
-					</LinkContainer>
-				</Container>
-			</Navbar>
+		<Navbar collapseOnSelect expand="lg" bg="light">
+			<Container>
+				<Navbar.Toggle aria-controls="responsive-navbar-nav" />
+				<Navbar.Collapse id="responsive-navbar-nav">
+				<Nav className="mr-auto px-5">
+						<LinkContainer to='/comida' className="mx-5"><Nav.Link>Comida</Nav.Link></LinkContainer>
+						<LinkContainer to='/ropa-y-accesorios' className="mx-5"><Nav.Link>Ropa y accesorios</Nav.Link></LinkContainer>
+						<LinkContainer to='/salud-y-belleza' className="mx-5"><Nav.Link>Salud y belleza</Nav.Link></LinkContainer>
+						<LinkContainer to='/electronica' className="mx-5"><Nav.Link>Electrónica</Nav.Link></LinkContainer>
+						<LinkContainer to='/otros' className="mx-5"><Nav.Link>Otros</Nav.Link></LinkContainer>
+				</Nav>
+				</Navbar.Collapse>
+			</Container>
+		</Navbar>
 	);
 };
 

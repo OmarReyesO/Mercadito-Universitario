@@ -7,3 +7,9 @@ main {
   width: 500px;
   height: 500px;
 }
+
+.productCard {
+  background-color: #ffffff;
+  width: 300px;
+  height: 150px;
+}

@@ -6,9 +6,16 @@ import {
 	registrarUsuarioReducer,
 } from './reducers/usuarioReducers';
 
+import {
+	listaProductosReducer,
+	crearProductoReducer
+} from './reducers/productosReducers';
+
 const reducer = combineReducers({
 	usuarioLogin: usuarioLoginReducer,
 	registrarUsuario: registrarUsuarioReducer,
+	listaProductos: listaProductosReducer,
+	productoCreado:crearProductoReducer
 });
 
 const infoUsuarioFromStorage = localStorage.getItem('infoUsuario')

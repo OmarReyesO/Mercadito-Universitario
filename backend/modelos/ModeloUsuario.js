@@ -34,7 +34,8 @@ const EsquemaUsuario = mongoose.Schema(
 		},
 
 		vendedor:{
-			type: Boolean
+			type: Boolean,
+			default: false
 		},
 
 		horario:[

@@ -14,6 +14,8 @@ const authUsuario = asyncHandler(async (req, res) => {
 			nombre:usuario.nombre,
 			apellido:usuario.apellido,
 			correo:usuario.correo,
+			campus:usuario.campus,
+			vendedor:usuario.vendedor,
 			token: generarToken(usuario._id),
 		});
 	} else {

@@ -26,7 +26,7 @@ const PantallaLogin = ({ history }) => {
 	};
 
 	return (
-		<Container>
+		<Container style={{height:'1000px'}}>
 			{error && <Mensaje variant='danger'>Se ha producido un error.</Mensaje>}
 			{loading ? (
 				<Loader />

@@ -16,7 +16,7 @@ const PantallaRegistro = ({ history }) => {
 	const [apellido, setApellido] = useState('');
 	const [campus, setCampus] = useState('');
 	const [noVendedor, setNoVendedor] = useState('');
-	const [vendedor, setVendedor] = useState('');
+	const [vendedor, setVendedor] = useState(false);
 	const [correo, setCorreo] = useState('');
 	const [contrasena, setContrasena] = useState('');
 	const [verificarContrasena, setVerificarContrasena] = useState('');
@@ -59,7 +59,7 @@ const PantallaRegistro = ({ history }) => {
 	};
 
 	return (
-		<Container>
+		<Container style={{height:'1000px'}}>
 			{loading ? (
 				<Loader />
 			) : (
