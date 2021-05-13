@@ -25,12 +25,24 @@ const obtenerProductos = asyncHandler(async (req, res) => {
     }
 })
 
-// @desc    Obtiene todos los productos de un us
+// @desc    Obtiene un producto por ID
+// @route   GET /api/productos/producto
+// @access  Privado
+const obtenerProducto = asyncHandler(async (req, res) => {
+    const producto = await Producto.findById(req.query.id);
+    
+    if(producto){
+        res.json(producto)
+    }else{
+        throw new Error('Productos no encontrados');
+    }
+})
+
+// @desc    Obtiene todos los productos de un usuario
 // @route   GET /api/productos
 // @access  Privado
 const obtenerMisProductos = asyncHandler(async (req, res) => {
-
-    const productos = await Producto.findById(req.body._id);
+    const productos = await Producto.find({usuario:req.query.id});
     
     if(productos){
         res.json(productos)
@@ -70,4 +82,4 @@ const crearProducto = asyncHandler(async (req, res) => {
 })
 
 
-export {obtenerProductos, crearProducto, obtenerMisProductos};
+export {obtenerProductos, obtenerProducto, crearProducto, obtenerMisProductos};

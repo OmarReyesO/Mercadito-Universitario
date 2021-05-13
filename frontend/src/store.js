@@ -8,14 +8,18 @@ import {
 
 import {
 	listaProductosReducer,
-	crearProductoReducer
+	crearProductoReducer,
+	listaMisProductosReducer,
+	obtenerProductoReducer
 } from './reducers/productosReducers';
 
 const reducer = combineReducers({
 	usuarioLogin: usuarioLoginReducer,
 	registrarUsuario: registrarUsuarioReducer,
 	listaProductos: listaProductosReducer,
-	productoCreado:crearProductoReducer
+	listaMisProductos:listaMisProductosReducer,
+	productoCreado:crearProductoReducer,
+	productoObtenido:obtenerProductoReducer
 });
 
 const infoUsuarioFromStorage = localStorage.getItem('infoUsuario')

@@ -6,7 +6,7 @@ const Loader = () => {
 		<Spinner
 			animation='border'
 			role='status'
-			variant='danger'
+			variant='primary'
 			style={{
 				width: '100px',
 				height: '100px',
@@ -14,7 +14,7 @@ const Loader = () => {
 				display: 'block',
 			}}
 		>
-			<span className='sr-only'>Loading...</span>
+			<span className='sr-only'>Cargando...</span>
 		</Spinner>
 	);
 };

@@ -29,7 +29,7 @@ const PantallaComida = () => {
                         <Row>
                         {productos.map((p, index) => (
                             <Col key={index} sm={12} md={3} className="my-3">
-                                <Card style={{ height:'9rem' }}>
+                                <Card className="product-card"  style={{ height:'9rem' }}>
                                     <Row>
                                     
                                         <Col sm={12} md={8}>
