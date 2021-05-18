@@ -5,12 +5,7 @@ import { crearProducto, reinciarProductoCreado} from '../acciones/accionesProduc
 import AWS from 'aws-sdk'
 
 const PantallaProductoEditar = ({history}) => {
-    // Set the Region 
-    AWS.config.update({
-        accessKeyId:'AKIAUWHIX6D5TQZLBQFO',
-        secretAccessKey: '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',
-        region: 'us-west-1'
-    });
+    
 
     //Create S3 service object
     const s3 = new AWS.S3({})
