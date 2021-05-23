@@ -8,6 +8,14 @@ import {
 	EXITO_USUARIO_REGISTRO,
 	FALLA_USUARIO_REGISTRO,
 	REINICIO_USUARIO_REGISTRO,
+	EXITO_OBTENER_CLIENTE,
+	EXITO_OBTENER_VENDEDOR,
+	FALLA_OBTENER_CLIENTE,
+	FALLA_OBTENER_VENDEDOR,
+	REINICIO_OBTENER_CLIENTE,
+	REINICIO_OBTENER_VENDEDOR,
+	SOLICITUD_OBTENER_VENDEDOR,
+	SOLICITUD_OBTENER_CLIENTE
 } from '../constantes/constantesUsuario';
 
 export const login = (correo, contrasena) => async (dispatch) => {
@@ -85,3 +93,45 @@ export const reinicioRegistroUsuario = () => (dispatch) => {
 		type: REINICIO_USUARIO_REGISTRO,
 	});
 };
+
+export const obtenerCliente = (id) => async (dispatch) => {
+	try {
+	  dispatch({ type: SOLICITUD_OBTENER_CLIENTE })
+  
+	  const { data } = await axios.get(`/api/usuarios/cliente?id=${id}`)
+  
+	  dispatch({
+		type: EXITO_OBTENER_CLIENTE,
+		payload: data,
+	  })
+	} catch (error) {
+	  dispatch({
+		type: FALLA_OBTENER_CLIENTE,
+		payload:
+		  error.response && error.response.data.message
+			? error.response.data.message
+			: error.message,
+	  })
+	}
+  }
+
+export const obtenerVendedor = (id) => async (dispatch) => {
+	try {
+	  dispatch({ type: SOLICITUD_OBTENER_VENDEDOR })
+  
+	  const { data } = await axios.get(`/api/usuarios/vendedor?id=${id}`)
+  
+	  dispatch({
+		type: EXITO_OBTENER_VENDEDOR,
+		payload: data,
+	  })
+	} catch (error) {
+	  dispatch({
+		type: FALLA_OBTENER_VENDEDOR,
+		payload:
+		  error.response && error.response.data.message
+			? error.response.data.message
+			: error.message,
+	  })
+	}
+  }

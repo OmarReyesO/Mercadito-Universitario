@@ -4,22 +4,35 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import {
 	usuarioLoginReducer,
 	registrarUsuarioReducer,
+	obtenerClienteReducer,
+	obtenerVendedorReducer
 } from './reducers/usuarioReducers';
 
 import {
 	listaProductosReducer,
 	crearProductoReducer,
 	listaMisProductosReducer,
-	obtenerProductoReducer
+	obtenerProductoReducer,
+	editarProductoReducer
 } from './reducers/productosReducers';
+
+import {crearOrdenReducer, obtenerOrdenClienteReducer, obtenerOrdenVendedorReducer, editarOrdenReducer} from './reducers/ordenesReducer';
 
 const reducer = combineReducers({
 	usuarioLogin: usuarioLoginReducer,
 	registrarUsuario: registrarUsuarioReducer,
+	cliente:obtenerClienteReducer,
+	vendedor:obtenerVendedorReducer,
 	listaProductos: listaProductosReducer,
 	listaMisProductos:listaMisProductosReducer,
 	productoCreado:crearProductoReducer,
-	productoObtenido:obtenerProductoReducer
+	productoEditado:editarProductoReducer,
+	productoObtenido:obtenerProductoReducer,
+	ordenCreada: crearOrdenReducer,
+	ordenEditada:editarOrdenReducer,
+	misOrdenesCliente:obtenerOrdenClienteReducer,
+	misOrdenesVendedor: obtenerOrdenVendedorReducer,
+
 });
 
 const infoUsuarioFromStorage = localStorage.getItem('infoUsuario')

@@ -21,33 +21,6 @@ const PantallaProducto = ({history, match}) => {
     const [imgProducto2, setImgProducto2] = useState(imgbaseURL + 'default_product.png');
     const [imgProducto3, setImgProducto3] = useState(imgbaseURL + 'default_product.png');
 
-
-    const cargarFoto = (e) => {
-        
-        const img1 = e.target.files[0];
-        const img2 = e.target.files[1];
-        const img3 = e.target.files[2];
-
-        console.log(img1,img2,img3)
-
-        img1 !== undefined && setImgProducto1(URL.createObjectURL(img1));
-        img2 !== undefined && setImgProducto2(URL.createObjectURL(img2));
-        img3 !== undefined && setImgProducto3(URL.createObjectURL(img3));
-
-        // Create the parameters for calling listObjects
-        var bucketParams = {
-            Bucket : 'imagenesmercadouni',
-            Key : 'test1.jpg',
-            ContentType: 'image/jpg',
-            Body: img1
-        };
-
-        //s3.putObject(bucketParams, function(err, data){
-         //   if(err) console.log(err);
-          //  else console.log("success", data);
-        //})
-	};
-
     useEffect(() => {
         dispatch(obtenerProducto(ID_PRODUCTO));
     }, [dispatch])
@@ -60,32 +33,21 @@ const PantallaProducto = ({history, match}) => {
                     {producto ? (
                         <>
                         <Row>
-                            <Col>
-                                <h1>{producto.nombre}</h1>
-                            </Col>
-                        </Row>
-                        <Row>
                             <Col className="mt-3" sm={12} md={4}>
-                                <div style={{width:'300px', height:'300px'}}>
-                                    <img style={{height:'300px'}} src={imgProducto1} />
-                                </div>
+                                <img style={{height:'350px'}} src={imgProducto1} />
                             </Col>
-                            <Col className="mt-3" sm={12} md={4}>
-                                <div style={{width:'300px',height:'300px'}}>
-                                    <img style={{height:'300px'}} src={imgProducto2} />
-                                </div>
-                            </Col>
-                            <Col className="mt-3" sm={12} md={4}>
-                                <div style={{width:'300px',height:'300px'}}>
-                                    <img style={{height:'300px'}} src={imgProducto3} />
-                                </div>
+                            <Col md={8} className="mt-5">
+                                <h4 className="mt-4">{producto.nombre}</h4>
+                                <p style={{fontFamily:'Roboto', fontSize:'18px'}} className="mt-4">{producto.descripcion}</p>
+                                <p style={{fontFamily:'Roboto', fontSize:'18px'}} className="mt-4">${producto.precio} MXN</p>
+                                <p style={{fontFamily:'Roboto', fontSize:'18px'}} className="mt-4">Cantidad disponible: {producto.cantidadStock}</p> 
                             </Col>
                         </Row>
                         </>
                     ) : (
                         <>
                             <h4 className="text-center">Lo sentimos, no pudimos encontrar el producto solicitado :(</h4>
-                            <div class="d-flex justify-content-center">
+                            <div className="d-flex justify-content-center">
                                 <img className="mt-5 shadow" src="https://pbs.twimg.com/profile_images/1273702207796449285/j8nbij6f_400x400.jpg" />
                             </div>
                         </>

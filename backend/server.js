@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 
 import rutasUsuario from './rutas/rutasUsuario.js';
 import rutasProducto from './rutas/rutasProducto.js';
+import rutasOrdenes from './rutas/rutasOrdenes.js';
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ app.use(express.json());
 
 app.use('/api/usuarios/', rutasUsuario);
 app.use('/api/productos/', rutasProducto);
+app.use('/api/ordenes/', rutasOrdenes);
 
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.join(__dirname, '/frontend/build')));

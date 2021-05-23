@@ -62,4 +62,32 @@ const registrarUsuario = asyncHandler(async (req, res) => {
 	}
 });
 
-export { authUsuario, registrarUsuario };
+// @desc    Obtiene un usuario por ID
+// @route   GET /api/usuarios/
+// @access  Privado
+const obtenerCliente = asyncHandler(async (req, res) => {
+	console.log(req.query.id)
+    const usuario = await Usuario.findById(req.query.id);
+    
+    if(usuario){
+        res.json(usuario)
+    }else{
+        throw new Error('Usuario no encontrado');
+    }
+})
+
+// @desc    Obtiene un usuario por ID
+// @route   GET /api/usuarios/
+// @access  Privado
+const obtenerVendedor = asyncHandler(async (req, res) => {
+	console.log(req.query.id)
+    const usuario = await Usuario.findById(req.query.id);
+    
+    if(usuario){
+        res.json(usuario)
+    }else{
+        throw new Error('Usuario no encontrado');
+    }
+})
+
+export { authUsuario, registrarUsuario, obtenerCliente, obtenerVendedor };

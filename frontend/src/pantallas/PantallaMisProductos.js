@@ -32,6 +32,10 @@ const PantallaProductos = ({history}) => {
         handleShow();
     }
 
+    const handleEditar = () =>{
+        history.push(`/producto/${productoActivo._id}/editar`)
+    }
+
     return (
         <Container className="pt-5" style={{height: '1000px'}}>
             {error && <Mensaje variant="danger">Error</Mensaje>}
@@ -62,7 +66,7 @@ const PantallaProductos = ({history}) => {
                                                         </Card.Body>
                                                 </Col>
                                                 <Col sm={0} md={4}>
-                                                    <Card.Img fluid src="https://www.smallwoods.org.uk/assets/Uploads/Documents/ac72cd8e0a/product-default-img__FitMaxWzEwMDAsODAwXQ.jpg" />
+                                                    <Card.Img fluid src={p.imagenes[0] !== undefined ? p.imagenes[0]: "https://www.smallwoods.org.uk/assets/Uploads/Documents/ac72cd8e0a/product-default-img__FitMaxWzEwMDAsODAwXQ.jpg"} />
                                                 </Col>
                                             </Row>
                                         </Card>   
@@ -78,15 +82,36 @@ const PantallaProductos = ({history}) => {
                     <Modal.Title>{productoActivo.nombre}</Modal.Title>
                 </Modal.Header>
 
-                <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                <Modal.Body>
+                    <Row>
+                        <Col md={4}>
+                            <img 
+                                    src={(productoActivo.imagenes && productoActivo.imagenes.length > 0) !== undefined ? productoActivo.imagenes[0] : "https://www.smallwoods.org.uk/assets/Uploads/Documents/ac72cd8e0a/product-default-img__FitMaxWzEwMDAsODAwXQ.jpg"} 
+                                    style={{width: '150px', height:'150px'}}
+                            />
+                        </Col>
+                        <Col md={8}>
+                            <strong>{productoActivo.descripcion}</strong>
+                            <br/>
+                            <br/>
+                            <strong>Precio: </strong>${productoActivo.precio}
+                            <br/>
+                            <br/>
+                            <strong>Cantidad disponible:</strong>{productoActivo.cantidadStock}
+                        </Col>
+                    </Row>
+                        
+                        
+                                    
+                </Modal.Body>
 
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
-                    Close
+                    Cerrar
                     </Button>
 
-                    <Button variant="primary" onClick={handleClose}>
-                    Save Changes
+                    <Button variant="primary" onClick={handleEditar}>
+                    Editar producto
                     </Button>
                 </Modal.Footer>
             </Modal>

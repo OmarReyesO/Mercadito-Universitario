@@ -36,19 +36,12 @@ const PantallaMiCuenta = ({history}) => {
                                         <Card.Body>
                                             <Card.Title>Productos comprados</Card.Title>
                                             <Card.Subtitle className="mb-2 text-muted">Ve todos los pedidos de los productos que has comprado</Card.Subtitle>
-                                            <Button className="float-right" variant="outline-primary">Ir</Button>
+                                            <LinkContainer to='/mis-pedidos' className="float-right">
+                                                    <Button variant="outline-primary">Ir</Button>
+                                                </LinkContainer>
                                         </Card.Body>
                                     </Card>
                                 </Col>
-                                <Col md={4}>
-                                        <Card style={{ width: '18rem', height: '10rem' }}>
-                                            <Card.Body>
-                                                <Card.Title>Chats</Card.Title>
-                                                <Card.Subtitle className="mb-2 text-muted">Ve los chats activos con vendedores</Card.Subtitle>
-                                                <Button className="float-right" variant="outline-primary">Ir</Button>
-                                            </Card.Body>
-                                        </Card>
-                                    </Col>
                             </Row>
                             {infoUsuario.vendedor && (
                                 <Row className="my-5">
@@ -69,16 +62,9 @@ const PantallaMiCuenta = ({history}) => {
                                             <Card.Body>
                                                 <Card.Title>Órdenes</Card.Title>
                                                 <Card.Subtitle className="mb-2 text-muted">Ve todas las órdenes de tus productos</Card.Subtitle>
-                                                <Button className="float-right" variant="outline-primary">Ir</Button>
-                                            </Card.Body>
-                                        </Card>
-                                    </Col>
-                                    <Col md={4}>
-                                        <Card style={{ width: '18rem', height: '10rem' }}>
-                                            <Card.Body>
-                                                <Card.Title>Chats clientes</Card.Title>
-                                                <Card.Subtitle className="mb-2 text-muted">Ve todos los chats activos tus clientes</Card.Subtitle>
-                                                <Button className="float-right" variant="outline-primary">Ir</Button>
+                                                <LinkContainer to='/mis-ordenes' className="float-right">
+                                                    <Button variant="outline-primary">Ir</Button>
+                                                </LinkContainer>
                                             </Card.Body>
                                         </Card>
                                     </Col>

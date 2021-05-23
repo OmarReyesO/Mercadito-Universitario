@@ -81,5 +81,38 @@ const crearProducto = asyncHandler(async (req, res) => {
 	
 })
 
+// @desc    Actualiza un producto
+// @route   PUT /api/productos
+// @access  Privado
+const editarProducto = asyncHandler(async (req, res) => {
+    const {
+        _id,
+        imagenes,
+        precio, 
+        cantidadStock,
+        nombre,
+        descripcion,
+        categoria,
+    } = req.body
 
-export {obtenerProductos, obtenerProducto, crearProducto, obtenerMisProductos};
+    const producto = await Producto.findById(_id);
+
+    if(producto){
+        producto.imagenes = imagenes || producto.imagenes;
+        producto.precio = precio || producto.precio;
+        producto.cantidadStock = cantidadStock || producto.cantidadStock;
+        producto.nombre = nombre || producto.nombre;
+        producto.descripcion = descripcion || producto.descripcion;
+        producto.categoria = categoria || producto.categoria;
+
+        const productoActualizado = await producto.save();
+		res.json(productoActualizado);
+    }else{
+        res.status(404);
+		throw new Error('Producto no encontrado');
+    }
+
+})
+
+
+export {obtenerProductos, obtenerProducto, crearProducto, obtenerMisProductos, editarProducto};

@@ -1,8 +1,8 @@
 import express from 'express'
 const router = express.Router()
-import {obtenerProductos, crearProducto, obtenerMisProductos, obtenerProducto} from '../controladores/controladorProducto.js';
+import {obtenerProductos, crearProducto, obtenerMisProductos, obtenerProducto, editarProducto} from '../controladores/controladorProducto.js';
 
-router.route('/').get(obtenerProductos).post(crearProducto);
+router.route('/').get(obtenerProductos).post(crearProducto).put(editarProducto);
 
 router.route('/mis-productos').get(obtenerMisProductos);
 
