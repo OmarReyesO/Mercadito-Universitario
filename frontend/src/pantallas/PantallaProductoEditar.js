@@ -104,7 +104,7 @@ const PantallaProducto = ({history, match}) => {
             dispatch(obtenerProducto(ID_PRODUCTO));
             dispatch(reinciarProductoEditado());
         }
-    }, [dispatch, producto, ID_PRODUCTO])
+    }, [dispatch, producto, ID_PRODUCTO, exito])
 
     return (
         <Container className="pt-5" style={{height: '1000px'}}>
