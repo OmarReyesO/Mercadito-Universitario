@@ -23,7 +23,7 @@ const PantallaProductoEditar = ({history}) => {
     useEffect(() => {
         if(!infoUsuario) history.push('/login');
         if(exito){
-            history.push(`/producto/${producto._id}`);
+            history.push(`/producto/${producto._id}/editar`);
             dispatch(reinciarProductoCreado());
         }
     }, [dispatch, infoUsuario, exito])
