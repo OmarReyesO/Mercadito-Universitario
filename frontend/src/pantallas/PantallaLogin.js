@@ -33,10 +33,10 @@ const PantallaLogin = ({ history }) => {
 			) : (
 				<Row className='justify-content-md-center py-5'>
 					<Col xs={12} md={6}>
-						<h2>Log In</h2>
+						<h2>Iniciar sesión</h2>
 						<Form onSubmit={submitHandler}>
 							<Form.Group>
-								<Form.Label>Email address</Form.Label>
+								<Form.Label>Correo electrónico</Form.Label>
 								<Form.Control
 									type='email'
 									placeholder='Ingresa tu correo'
@@ -46,7 +46,7 @@ const PantallaLogin = ({ history }) => {
 							</Form.Group>
 
 							<Form.Group>
-								<Form.Label>Password</Form.Label>
+								<Form.Label>Contraseña</Form.Label>
 								<Form.Control
 									type='password'
 									placeholder='Ingresa tu contraseña'
