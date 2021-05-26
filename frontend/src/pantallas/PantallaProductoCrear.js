@@ -24,6 +24,7 @@ const PantallaProductoEditar = ({history}) => {
         if(!infoUsuario) history.push('/login');
         if(exito){
             history.push(`/producto/${producto._id}/editar`);
+            console.log("exito")
             dispatch(reinciarProductoCreado());
         }
     }, [dispatch, infoUsuario, exito])

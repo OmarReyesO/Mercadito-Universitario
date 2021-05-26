@@ -63,12 +63,12 @@ const PantallaComida = ({history}) => {
         <div className="pt-5 mx-5" style={{height:'1000px'}}>
                 <Row>
                     <LinkContainer to='/'>
-                        <Nav.Link>Inicio / Comida</Nav.Link>
+                        <Nav.Link>Inicio / Electronica</Nav.Link>
                     </LinkContainer>
                 </Row>
                 {!ordenLoading && !loading && productos ? (
                     <>
-                        <h1>Comida</h1>
+                        <h1>Electronica</h1>
                         <Row>
                         {productos.map((p, index) => (
                             <Col key={index} sm={12} md={3} className="my-3">

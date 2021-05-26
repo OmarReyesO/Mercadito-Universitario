@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Container, Row, Col, Form, Button, InputGroup} from 'react-bootstrap';
 import AWS from 'aws-sdk'
-import {obtenerProducto, editarProducto, reinciarProductoEditado} from '../acciones/accionesProductos';
+import {obtenerProducto, editarProducto, reinciarProductoEditado, reinciarProductoCreado} from '../acciones/accionesProductos';
 
 import Loader from '../componentes/Loader';
 import Mensaje from '../componentes/Mensaje';
@@ -101,8 +101,10 @@ const PantallaProducto = ({history, match}) => {
         }
 
         if(exito){
+            history.push('/mis-productos')
             dispatch(obtenerProducto(ID_PRODUCTO));
             dispatch(reinciarProductoEditado());
+            dispatch(reinciarProductoCreado());
         }
     }, [dispatch, producto, ID_PRODUCTO, exito])
 
